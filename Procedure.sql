@@ -13,19 +13,19 @@ BEGIN
 
     BEGIN TRY
 
-        -- получаем склад
+        -- РїРѕР»СѓС‡Р°РµРј СЃРєР»Р°Рґ
         SELECT @store = storeid
         FROM Salehead
         WHERE id = @Headid;
 
         IF @store IS NULL
-            THROW 50001, 'Накладная не найдена', 1;
+            THROW 50001, 'РќР°РєР»Р°РґРЅР°СЏ РЅРµ РЅР°Р№РґРµРЅР°', 1;
 
-        -- проверка товара
+        -- РїСЂРѕРІРµСЂРєР° С‚РѕРІР°СЂР°
         IF NOT EXISTS (SELECT 1 FROM Nomenlist WHERE id = @Nomenid)
-            THROW 50002, 'Такой товар не найден', 1;
+            THROW 50002, 'РўР°РєРѕР№ С‚РѕРІР°СЂ РЅРµ РЅР°Р№РґРµРЅ', 1;
 
-        -- получаем остатки
+        -- РїРѕР»СѓС‡Р°РµРј РѕСЃС‚Р°С‚РєРё
         SELECT @prid = id,
                @quant = quanttosale
         FROM Pricelist
@@ -33,10 +33,10 @@ BEGIN
           AND storeid = @store;
 
         IF @prid IS NULL
-            THROW 50004, 'Товар не найден на складе', 1;
+            THROW 50004, 'РўРѕРІР°СЂ РЅРµ РЅР°Р№РґРµРЅ РЅР° СЃРєР»Р°РґРµ', 1;
 
         IF @quant < @Quant
-            THROW 50003, 'Количество недостаточно для продажи', 1;
+            THROW 50003, 'РљРѕР»РёС‡РµСЃС‚РІРѕ РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РґР»СЏ РїСЂРѕРґР°Р¶Рё', 1;
 
         BEGIN TRANSACTION;
 
