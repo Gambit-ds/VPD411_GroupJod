@@ -55,7 +55,7 @@ select
 		uc.fname + ' ' +LEFT(uc.name, 1) + '. '+ LEFT(uc.sname, 1) + '.' as clishortname,
 		uc.fname+' '+uc.name+' '+uc.sname as clilongname,
 		sh.doctype,
-		CASE sh.doctype WHEN 0 THEN 'Выдача товара' WHEN 1 THEN 'Возврат товара' ELSE 'Неизвестно' END doctypecode,
+		CASE sh.doctype WHEN 0 THEN 'Р’С‹РґР°С‡Р° С‚РѕРІР°СЂР°' WHEN 1 THEN 'Р’РѕР·РІСЂР°С‚ С‚РѕРІР°СЂР°' ELSE 'РќРµРёР·РІРµСЃС‚РЅРѕ' END doctypecode,
 		sh.status,
 		l.description statuscode,
 		sh.datastart,
