@@ -1,2 +1,28 @@
 test TortoiseGit Дмитрий
 добавил строку
+
+
+Использование процедуры в C#:
+else if (parts[0] == "PROC")
+{
+   try
+   {
+        DBConnect dbCon = new DBConnect(strConn);
+        var idParam = new SqlParameter("@Id", SqlDbType.Int)
+        {
+            Direction = ParameterDirection.Output
+        };
+        await dbCon.ExecuteProcedureNonQueryAsync(parts[1],
+        new SqlParameter("@headid", parts[2]),
+        new SqlParameter("@nomenid", parts[3]),
+        new SqlParameter("@quant", parts[4]),
+        idParam);
+
+        string seleSpecId = idParam.Value.ToString();
+        SendMessag($"1:{seleSpecId}");
+    }
+    catch (SqlException ex)
+    {
+        SendMessag($"-1:{ex.Message}");
+    }
+ 
