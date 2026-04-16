@@ -3,6 +3,7 @@ test TortoiseGit Дмитрий
 
 
 Использование процедуры в C#:
+msg = "PROC:SalespecAdd:1:2:10";
 else if (parts[0] == "PROC")
 {
    try
