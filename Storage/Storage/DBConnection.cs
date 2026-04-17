@@ -83,5 +83,26 @@ namespace DBQwery
                 return await cmd.ExecuteNonQueryAsync();
             }
         }
+        public async Task<DataTable> ExecuteProcedureQueryAsync(string procedureName, params SqlParameter[] parameters)
+        {
+            using (SqlConnection conn = GetConnection())
+            using (SqlCommand cmd = new SqlCommand(procedureName, conn))
+            {
+                // Указываем, что вызывается именно хранимая процедура
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                if (parameters != null)
+                    cmd.Parameters.AddRange(parameters);
+
+                await conn.OpenAsync();
+
+                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    DataTable table = new DataTable();
+                    table.Load(reader);
+                    return table;
+                }
+            }
+        }
     }
 }

@@ -1,0 +1,28 @@
+# Visual Studio
+.vs/
+**/.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Результаты сборки
+**/bin/
+**/obj/
+
+# Временные и служебные файлы
+*.log
+*.tmp
+*.cache
+
+# Файлы оформления среды
+DocumentLayout.json
+DocumentLayout.backup.json
+
+# Индексы и служебные данные среды
+*.vsidx
+*.dtbcache*
+*.futdcache*
+storage.metadata.v9.bin
+storage.projects.v9.bin
+storage.strings.v9.bin
