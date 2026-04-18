@@ -1,6 +1,7 @@
 ﻿using DBQwery;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using System.Globalization;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -14,14 +15,13 @@ namespace Storage
         private CancellationTokenSource? _stopSource;
         private bool _serverStarted;
 
-        // Строка подключения сервера к базе данных.
         private readonly string _connectionString =
             @"Data Source=DESKTOP-DF3LQAG\SQLEXPRESS;Initial Catalog=Storag;Integrated Security=true;Connect Timeout=30;TrustServerCertificate=true";
 
         public ServerForm()
         {
             InitializeComponent();
-            this.FormClosing += ServerForm_FormClosing;
+            FormClosing += ServerForm_FormClosing;
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -45,7 +45,6 @@ namespace Storage
                 _listener.Start();
 
                 _serverStarted = true;
-
                 buttonStart.Enabled = false;
                 buttonStop.Enabled = true;
                 textBoxPort.Enabled = false;
@@ -240,6 +239,72 @@ namespace Storage
                 case "REPORT_ORDERS_BY_PRODUCT":
                     return await HandleReportOrdersByProductAsync(parts);
 
+                case "STORES_GET_ALL":
+                    return await HandleStoresGetAllAsync();
+
+                case "SUPPLIERS_GET_ALL":
+                    return await HandleSuppliersGetAllAsync();
+
+                case "STOCK_GET_ALL":
+                    return await HandleStockGetAllAsync(parts);
+
+                case "ORDERHEADS_GET_ALL":
+                    return await HandleOrderHeadsGetAllAsync();
+
+                case "ORDERSPECS_GET_BY_HEAD":
+                    return await HandleOrderSpecsGetByHeadAsync(parts);
+
+                case "ORDERHEAD_ADD":
+                    return await HandleOrderHeadAddAsync(parts);
+
+                case "ORDERSPEC_ADD":
+                    return await HandleOrderSpecAddAsync(parts);
+
+                case "ORDERSPEC_DELETE":
+                    return await HandleOrderSpecDeleteAsync(parts);
+
+                case "ORDERHEAD_ACCEPT":
+                    return await HandleOrderHeadAcceptAsync(parts);
+
+                case "SALEHEADS_GET_ALL":
+                    return await HandleSaleHeadsGetAllAsync();
+
+                case "SALESPECS_GET_BY_HEAD":
+                    return await HandleSaleSpecsGetByHeadAsync(parts);
+
+                case "SALEHEAD_ADD":
+                    return await HandleSaleHeadAddAsync(parts);
+
+                case "SALESPEC_ADD":
+                    return await HandleSaleSpecAddAsync(parts);
+
+                case "SALESPEC_DELETE":
+                    return await HandleSaleSpecDeleteAsync(parts);
+
+                case "SALEHEAD_PROCESS":
+                    return await HandleSaleHeadProcessAsync(parts);
+
+                case "TRANSFERHEADS_GET_ALL":
+                    return await HandleTransferHeadsGetAllAsync();
+
+                case "TRANSFERSPECS_GET_BY_HEAD":
+                    return await HandleTransferSpecsGetByHeadAsync(parts);
+
+                case "TRANSFERHEAD_ADD":
+                    return await HandleTransferHeadAddAsync(parts);
+
+                case "TRANSFERSPEC_ADD":
+                    return await HandleTransferSpecAddAsync(parts);
+
+                case "TRANSFERSPEC_DELETE":
+                    return await HandleTransferSpecDeleteAsync(parts);
+
+                case "TRANSFERHEAD_SEND":
+                    return await HandleTransferHeadSendAsync(parts);
+
+                case "TRANSFERHEAD_ACCEPT":
+                    return await HandleTransferHeadAcceptAsync(parts);
+
                 default:
                     return "ERR:UNKNOWN_COMMAND";
             }
@@ -252,7 +317,7 @@ namespace Storage
 
             try
             {
-                DBConnection db = new DBConnection(_connectionString);
+                DBConnection db = CreateDb();
 
                 DataTable dt = await db.ExecuteProcedureQueryAsync(
                     "dbo.AuthUser",
@@ -281,32 +346,12 @@ namespace Storage
 
         private async Task<string> HandleRolesGetAllAsync()
         {
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-                DataTable dt = await db.ExecuteProcedureQueryAsync("dbo.RolesGetAll");
-                return "OK:ROLES|" + TableToJson(dt);
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка чтения ролей: " + ex.Message);
-                return "ERR:ROLES";
-            }
+            return await QueryProcedureAsJsonAsync("dbo.RolesGetAll", "OK:ROLES|", "ERR:ROLES|");
         }
 
         private async Task<string> HandleUsersGetAllAsync()
         {
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-                DataTable dt = await db.ExecuteProcedureQueryAsync("dbo.UsersGetAll");
-                return "OK:USERS|" + TableToJson(dt);
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка чтения пользователей: " + ex.Message);
-                return "ERR:USERS";
-            }
+            return await QueryProcedureAsJsonAsync("dbo.UsersGetAll", "OK:USERS|", "ERR:USERS|");
         }
 
         private async Task<string> HandleUserAddAsync(string[] parts)
@@ -314,27 +359,17 @@ namespace Storage
             if (parts.Length < 7)
                 return "ERR:USER_ADD_FORMAT";
 
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-
-                DataTable dt = await db.ExecuteProcedureQueryAsync(
-                    "dbo.UserAdd",
-                    new SqlParameter("@Name", parts[1]),
-                    new SqlParameter("@Sname", ToDbNullableString(parts[2])),
-                    new SqlParameter("@Fname", ToDbNullableString(parts[3])),
-                    new SqlParameter("@RoleId", int.Parse(parts[4])),
-                    new SqlParameter("@Login", parts[5]),
-                    new SqlParameter("@Password", parts[6]));
-
-                string userId = dt.Rows.Count > 0 ? dt.Rows[0]["userid"]?.ToString() ?? "" : "";
-                return "OK:USER_ADD|" + userId;
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка добавления пользователя: " + ex.Message);
-                return "ERR:USER_ADD|" + NormalizeMessage(ex.Message);
-            }
+            return await ExecuteProcedureReturningIdAsync(
+                "dbo.UserAdd",
+                "userid",
+                "OK:USER_ADD|",
+                "ERR:USER_ADD|",
+                new SqlParameter("@Name", parts[1]),
+                new SqlParameter("@Sname", ToDbNullableString(parts[2])),
+                new SqlParameter("@Fname", ToDbNullableString(parts[3])),
+                new SqlParameter("@RoleId", ParseIntRequired(parts[4])),
+                new SqlParameter("@Login", parts[5]),
+                new SqlParameter("@Password", parts[6]));
         }
 
         private async Task<string> HandleUserUpdateAsync(string[] parts)
@@ -342,27 +377,17 @@ namespace Storage
             if (parts.Length < 8)
                 return "ERR:USER_UPDATE_FORMAT";
 
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-
-                await db.ExecuteProcedureNonQueryAsync(
-                    "dbo.UserUpdate",
-                    new SqlParameter("@UserId", int.Parse(parts[1])),
-                    new SqlParameter("@Name", parts[2]),
-                    new SqlParameter("@Sname", ToDbNullableString(parts[3])),
-                    new SqlParameter("@Fname", ToDbNullableString(parts[4])),
-                    new SqlParameter("@RoleId", int.Parse(parts[5])),
-                    new SqlParameter("@Login", parts[6]),
-                    new SqlParameter("@Password", ToDbNullableString(parts[7])));
-
-                return "OK:USER_UPDATE";
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка изменения пользователя: " + ex.Message);
-                return "ERR:USER_UPDATE|" + NormalizeMessage(ex.Message);
-            }
+            return await ExecuteProcedureAsync(
+                "dbo.UserUpdate",
+                "OK:USER_UPDATE",
+                "ERR:USER_UPDATE|",
+                new SqlParameter("@UserId", ParseIntRequired(parts[1])),
+                new SqlParameter("@Name", parts[2]),
+                new SqlParameter("@Sname", ToDbNullableString(parts[3])),
+                new SqlParameter("@Fname", ToDbNullableString(parts[4])),
+                new SqlParameter("@RoleId", ParseIntRequired(parts[5])),
+                new SqlParameter("@Login", parts[6]),
+                new SqlParameter("@Password", ToDbNullableString(parts[7])));
         }
 
         private async Task<string> HandleUserDeleteAsync(string[] parts)
@@ -370,36 +395,16 @@ namespace Storage
             if (parts.Length < 2)
                 return "ERR:USER_DELETE_FORMAT";
 
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-
-                await db.ExecuteProcedureNonQueryAsync(
-                    "dbo.UserDelete",
-                    new SqlParameter("@UserId", int.Parse(parts[1])));
-
-                return "OK:USER_DELETE";
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка удаления пользователя: " + ex.Message);
-                return "ERR:USER_DELETE|" + NormalizeMessage(ex.Message);
-            }
+            return await ExecuteProcedureAsync(
+                "dbo.UserDelete",
+                "OK:USER_DELETE",
+                "ERR:USER_DELETE|",
+                new SqlParameter("@UserId", ParseIntRequired(parts[1])));
         }
 
         private async Task<string> HandleCategoriesGetAllAsync()
         {
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-                DataTable dt = await db.ExecuteProcedureQueryAsync("dbo.CategoriesGetAll");
-                return "OK:CATEGORIES|" + TableToJson(dt);
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка чтения категорий: " + ex.Message);
-                return "ERR:CATEGORIES";
-            }
+            return await QueryProcedureAsJsonAsync("dbo.CategoriesGetAll", "OK:CATEGORIES|", "ERR:CATEGORIES|");
         }
 
         private async Task<string> HandleCategoryAddAsync(string[] parts)
@@ -407,22 +412,12 @@ namespace Storage
             if (parts.Length < 2)
                 return "ERR:CATEGORY_ADD_FORMAT";
 
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-
-                DataTable dt = await db.ExecuteProcedureQueryAsync(
-                    "dbo.CategoryAdd",
-                    new SqlParameter("@Code", parts[1]));
-
-                string categoryId = dt.Rows.Count > 0 ? dt.Rows[0]["categoryid"]?.ToString() ?? "" : "";
-                return "OK:CATEGORY_ADD|" + categoryId;
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка добавления категории: " + ex.Message);
-                return "ERR:CATEGORY_ADD|" + NormalizeMessage(ex.Message);
-            }
+            return await ExecuteProcedureReturningIdAsync(
+                "dbo.CategoryAdd",
+                "categoryid",
+                "OK:CATEGORY_ADD|",
+                "ERR:CATEGORY_ADD|",
+                new SqlParameter("@Code", parts[1]));
         }
 
         private async Task<string> HandleCategoryUpdateAsync(string[] parts)
@@ -430,22 +425,12 @@ namespace Storage
             if (parts.Length < 3)
                 return "ERR:CATEGORY_UPDATE_FORMAT";
 
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-
-                await db.ExecuteProcedureNonQueryAsync(
-                    "dbo.CategoryUpdate",
-                    new SqlParameter("@CategoryId", int.Parse(parts[1])),
-                    new SqlParameter("@Code", parts[2]));
-
-                return "OK:CATEGORY_UPDATE";
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка изменения категории: " + ex.Message);
-                return "ERR:CATEGORY_UPDATE|" + NormalizeMessage(ex.Message);
-            }
+            return await ExecuteProcedureAsync(
+                "dbo.CategoryUpdate",
+                "OK:CATEGORY_UPDATE",
+                "ERR:CATEGORY_UPDATE|",
+                new SqlParameter("@CategoryId", ParseIntRequired(parts[1])),
+                new SqlParameter("@Code", parts[2]));
         }
 
         private async Task<string> HandleCategoryDeleteAsync(string[] parts)
@@ -453,51 +438,21 @@ namespace Storage
             if (parts.Length < 2)
                 return "ERR:CATEGORY_DELETE_FORMAT";
 
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-
-                await db.ExecuteProcedureNonQueryAsync(
-                    "dbo.CategoryDelete",
-                    new SqlParameter("@CategoryId", int.Parse(parts[1])));
-
-                return "OK:CATEGORY_DELETE";
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка удаления категории: " + ex.Message);
-                return "ERR:CATEGORY_DELETE|" + NormalizeMessage(ex.Message);
-            }
+            return await ExecuteProcedureAsync(
+                "dbo.CategoryDelete",
+                "OK:CATEGORY_DELETE",
+                "ERR:CATEGORY_DELETE|",
+                new SqlParameter("@CategoryId", ParseIntRequired(parts[1])));
         }
 
         private async Task<string> HandleProductsGetAllAsync()
         {
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-                DataTable dt = await db.ExecuteProcedureQueryAsync("dbo.ProductsGetAll");
-                return "OK:PRODUCTS|" + TableToJson(dt);
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка чтения товаров: " + ex.Message);
-                return "ERR:PRODUCTS";
-            }
+            return await QueryProcedureAsJsonAsync("dbo.ProductsGetAll", "OK:PRODUCTS|", "ERR:PRODUCTS|");
         }
 
         private async Task<string> HandleProductsShortGetAllAsync()
         {
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-                DataTable dt = await db.ExecuteProcedureQueryAsync("dbo.ProductsShortGetAll");
-                return "OK:PRODUCTS_SHORT|" + TableToJson(dt);
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка чтения краткого списка товаров: " + ex.Message);
-                return "ERR:PRODUCTS_SHORT";
-            }
+            return await QueryProcedureAsJsonAsync("dbo.ProductsShortGetAll", "OK:PRODUCTS_SHORT|", "ERR:PRODUCTS_SHORT|");
         }
 
         private async Task<string> HandleProductAddAsync(string[] parts)
@@ -505,26 +460,16 @@ namespace Storage
             if (parts.Length < 6)
                 return "ERR:PRODUCT_ADD_FORMAT";
 
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-
-                DataTable dt = await db.ExecuteProcedureQueryAsync(
-                    "dbo.ProductAdd",
-                    new SqlParameter("@CategoryId", int.Parse(parts[1])),
-                    new SqlParameter("@Code", parts[2]),
-                    new SqlParameter("@Description", ToDbNullableString(parts[3])),
-                    new SqlParameter("@Weight", ToDbNullableInt(parts[4])),
-                    new SqlParameter("@Size", ToDbNullableInt(parts[5])));
-
-                string productId = dt.Rows.Count > 0 ? dt.Rows[0]["productid"]?.ToString() ?? "" : "";
-                return "OK:PRODUCT_ADD|" + productId;
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка добавления товара: " + ex.Message);
-                return "ERR:PRODUCT_ADD|" + NormalizeMessage(ex.Message);
-            }
+            return await ExecuteProcedureReturningIdAsync(
+                "dbo.ProductAdd",
+                "productid",
+                "OK:PRODUCT_ADD|",
+                "ERR:PRODUCT_ADD|",
+                new SqlParameter("@CategoryId", ParseIntRequired(parts[1])),
+                new SqlParameter("@Code", parts[2]),
+                new SqlParameter("@Description", ToDbNullableString(parts[3])),
+                new SqlParameter("@Weight", ToDbNullableInt(parts[4])),
+                new SqlParameter("@Size", ToDbNullableInt(parts[5])));
         }
 
         private async Task<string> HandleProductUpdateAsync(string[] parts)
@@ -532,26 +477,16 @@ namespace Storage
             if (parts.Length < 7)
                 return "ERR:PRODUCT_UPDATE_FORMAT";
 
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-
-                await db.ExecuteProcedureNonQueryAsync(
-                    "dbo.ProductUpdate",
-                    new SqlParameter("@ProductId", int.Parse(parts[1])),
-                    new SqlParameter("@CategoryId", int.Parse(parts[2])),
-                    new SqlParameter("@Code", parts[3]),
-                    new SqlParameter("@Description", ToDbNullableString(parts[4])),
-                    new SqlParameter("@Weight", ToDbNullableInt(parts[5])),
-                    new SqlParameter("@Size", ToDbNullableInt(parts[6])));
-
-                return "OK:PRODUCT_UPDATE";
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка изменения товара: " + ex.Message);
-                return "ERR:PRODUCT_UPDATE|" + NormalizeMessage(ex.Message);
-            }
+            return await ExecuteProcedureAsync(
+                "dbo.ProductUpdate",
+                "OK:PRODUCT_UPDATE",
+                "ERR:PRODUCT_UPDATE|",
+                new SqlParameter("@ProductId", ParseIntRequired(parts[1])),
+                new SqlParameter("@CategoryId", ParseIntRequired(parts[2])),
+                new SqlParameter("@Code", parts[3]),
+                new SqlParameter("@Description", ToDbNullableString(parts[4])),
+                new SqlParameter("@Weight", ToDbNullableInt(parts[5])),
+                new SqlParameter("@Size", ToDbNullableInt(parts[6])));
         }
 
         private async Task<string> HandleProductDeleteAsync(string[] parts)
@@ -559,51 +494,21 @@ namespace Storage
             if (parts.Length < 2)
                 return "ERR:PRODUCT_DELETE_FORMAT";
 
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-
-                await db.ExecuteProcedureNonQueryAsync(
-                    "dbo.ProductDelete",
-                    new SqlParameter("@ProductId", int.Parse(parts[1])));
-
-                return "OK:PRODUCT_DELETE";
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка удаления товара: " + ex.Message);
-                return "ERR:PRODUCT_DELETE|" + NormalizeMessage(ex.Message);
-            }
+            return await ExecuteProcedureAsync(
+                "dbo.ProductDelete",
+                "OK:PRODUCT_DELETE",
+                "ERR:PRODUCT_DELETE|",
+                new SqlParameter("@ProductId", ParseIntRequired(parts[1])));
         }
 
         private async Task<string> HandleClientsGetAllAsync()
         {
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-                DataTable dt = await db.ExecuteProcedureQueryAsync("dbo.ClientsGetAll");
-                return "OK:CLIENTS|" + TableToJson(dt);
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка чтения клиентов: " + ex.Message);
-                return "ERR:CLIENTS";
-            }
+            return await QueryProcedureAsJsonAsync("dbo.ClientsGetAll", "OK:CLIENTS|", "ERR:CLIENTS|");
         }
 
         private async Task<string> HandleReportStockAsync()
         {
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-                DataTable dt = await db.ExecuteProcedureQueryAsync("dbo.ReportStock");
-                return "OK:REPORT|" + TableToJson(dt);
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка отчета по остаткам: " + ex.Message);
-                return "ERR:REPORT_STOCK|" + NormalizeMessage(ex.Message);
-            }
+            return await QueryProcedureAsJsonAsync("dbo.ReportStock", "OK:REPORT|", "ERR:REPORT_STOCK|");
         }
 
         private async Task<string> HandleReportMovementAsync(string[] parts)
@@ -611,21 +516,12 @@ namespace Storage
             if (parts.Length < 3)
                 return "ERR:REPORT_MOVEMENT_FORMAT";
 
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-                DataTable dt = await db.ExecuteProcedureQueryAsync(
-                    "dbo.ReportMovement",
-                    new SqlParameter("@DateFrom", ToDbNullableDate(parts[1])),
-                    new SqlParameter("@DateTo", ToDbNullableDate(parts[2])));
-
-                return "OK:REPORT|" + TableToJson(dt);
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка отчета по движению: " + ex.Message);
-                return "ERR:REPORT_MOVEMENT|" + NormalizeMessage(ex.Message);
-            }
+            return await QueryProcedureAsJsonAsync(
+                "dbo.ReportMovement",
+                "OK:REPORT|",
+                "ERR:REPORT_MOVEMENT|",
+                new SqlParameter("@DateFrom", ToDbNullableDate(parts[1])),
+                new SqlParameter("@DateTo", ToDbNullableDate(parts[2])));
         }
 
         private async Task<string> HandleReportOrdersByDateAsync(string[] parts)
@@ -633,21 +529,12 @@ namespace Storage
             if (parts.Length < 3)
                 return "ERR:REPORT_ORDERS_BY_DATE_FORMAT";
 
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-                DataTable dt = await db.ExecuteProcedureQueryAsync(
-                    "dbo.ReportOrdersByDate",
-                    new SqlParameter("@DateFrom", ToDbNullableDate(parts[1])),
-                    new SqlParameter("@DateTo", ToDbNullableDate(parts[2])));
-
-                return "OK:REPORT|" + TableToJson(dt);
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка отчета по заказам за период: " + ex.Message);
-                return "ERR:REPORT_ORDERS_BY_DATE|" + NormalizeMessage(ex.Message);
-            }
+            return await QueryProcedureAsJsonAsync(
+                "dbo.ReportOrdersByDate",
+                "OK:REPORT|",
+                "ERR:REPORT_ORDERS_BY_DATE|",
+                new SqlParameter("@DateFrom", ToDbNullableDate(parts[1])),
+                new SqlParameter("@DateTo", ToDbNullableDate(parts[2])));
         }
 
         private async Task<string> HandleReportOrdersByClientAsync(string[] parts)
@@ -655,20 +542,11 @@ namespace Storage
             if (parts.Length < 2)
                 return "ERR:REPORT_ORDERS_BY_CLIENT_FORMAT";
 
-            try
-            {
-                DBConnection db = new DBConnection(_connectionString);
-                DataTable dt = await db.ExecuteProcedureQueryAsync(
-                    "dbo.ReportOrdersByClient",
-                    new SqlParameter("@ClientId", int.Parse(parts[1])));
-
-                return "OK:REPORT|" + TableToJson(dt);
-            }
-            catch (Exception ex)
-            {
-                AddLog("Ошибка отчета по клиенту: " + ex.Message);
-                return "ERR:REPORT_ORDERS_BY_CLIENT|" + NormalizeMessage(ex.Message);
-            }
+            return await QueryProcedureAsJsonAsync(
+                "dbo.ReportOrdersByClient",
+                "OK:REPORT|",
+                "ERR:REPORT_ORDERS_BY_CLIENT|",
+                new SqlParameter("@ClientId", ParseIntRequired(parts[1])));
         }
 
         private async Task<string> HandleReportOrdersByProductAsync(string[] parts)
@@ -676,25 +554,338 @@ namespace Storage
             if (parts.Length < 2)
                 return "ERR:REPORT_ORDERS_BY_PRODUCT_FORMAT";
 
+            return await QueryProcedureAsJsonAsync(
+                "dbo.ReportOrdersByProduct",
+                "OK:REPORT|",
+                "ERR:REPORT_ORDERS_BY_PRODUCT|",
+                new SqlParameter("@ProductId", ParseIntRequired(parts[1])));
+        }
+
+        private async Task<string> HandleStoresGetAllAsync()
+        {
+            return await QueryProcedureAsJsonAsync("dbo.StoresGetAll", "OK:STORES|", "ERR:STORES|");
+        }
+
+        private async Task<string> HandleSuppliersGetAllAsync()
+        {
+            return await QueryProcedureAsJsonAsync("dbo.SuppliersGetAll", "OK:SUPPLIERS|", "ERR:SUPPLIERS|");
+        }
+
+        private async Task<string> HandleStockGetAllAsync(string[] parts)
+        {
+            object storeId = DBNull.Value;
+            object productId = DBNull.Value;
+
+            if (parts.Length > 1)
+                storeId = ToDbNullableInt(parts[1]);
+
+            if (parts.Length > 2)
+                productId = ToDbNullableInt(parts[2]);
+
+            return await QueryProcedureAsJsonAsync(
+                "dbo.StockGetAll",
+                "OK:STOCK|",
+                "ERR:STOCK|",
+                new SqlParameter("@StoreId", storeId),
+                new SqlParameter("@ProductId", productId));
+        }
+
+        private async Task<string> HandleOrderHeadsGetAllAsync()
+        {
+            return await QueryProcedureAsJsonAsync("dbo.OrderHeadsGetAll", "OK:ORDERHEADS|", "ERR:ORDERHEADS|");
+        }
+
+        private async Task<string> HandleOrderSpecsGetByHeadAsync(string[] parts)
+        {
+            if (parts.Length < 2)
+                return "ERR:ORDERSPECS_GET_BY_HEAD_FORMAT";
+
+            return await QueryProcedureAsJsonAsync(
+                "dbo.OrderSpecsGetByHead",
+                "OK:ORDERSPECS|",
+                "ERR:ORDERSPECS|",
+                new SqlParameter("@HeadId", ParseIntRequired(parts[1])));
+        }
+
+        private async Task<string> HandleOrderHeadAddAsync(string[] parts)
+        {
+            if (parts.Length < 3)
+                return "ERR:ORDERHEAD_ADD_FORMAT";
+
+            return await ExecuteProcedureReturningIdAsync(
+                "dbo.OrderHeadAdd",
+                "orderheadid",
+                "OK:ORDERHEAD_ADD|",
+                "ERR:ORDERHEAD_ADD|",
+                new SqlParameter("@StoreId", ParseIntRequired(parts[1])),
+                new SqlParameter("@SupplierId", ParseIntRequired(parts[2])));
+        }
+
+        private async Task<string> HandleOrderSpecAddAsync(string[] parts)
+        {
+            if (parts.Length < 5)
+                return "ERR:ORDERSPEC_ADD_FORMAT";
+
+            return await ExecuteProcedureReturningIdAsync(
+                "dbo.OrderSpecAdd",
+                "orderspecid",
+                "OK:ORDERSPEC_ADD|",
+                "ERR:ORDERSPEC_ADD|",
+                new SqlParameter("@HeadId", ParseIntRequired(parts[1])),
+                new SqlParameter("@NomenId", ParseIntRequired(parts[2])),
+                new SqlParameter("@Quant", ParseDecimalRequired(parts[3])),
+                new SqlParameter("@Price", ParseDecimalRequired(parts[4])));
+        }
+
+        private async Task<string> HandleOrderSpecDeleteAsync(string[] parts)
+        {
+            if (parts.Length < 2)
+                return "ERR:ORDERSPEC_DELETE_FORMAT";
+
+            return await ExecuteProcedureAsync(
+                "dbo.OrderSpecDelete",
+                "OK:ORDERSPEC_DELETE",
+                "ERR:ORDERSPEC_DELETE|",
+                new SqlParameter("@SpecId", ParseIntRequired(parts[1])));
+        }
+
+        private async Task<string> HandleOrderHeadAcceptAsync(string[] parts)
+        {
+            if (parts.Length < 2)
+                return "ERR:ORDERHEAD_ACCEPT_FORMAT";
+
+            return await ExecuteProcedureAsync(
+                "dbo.OrderHeadAccept",
+                "OK:ORDERHEAD_ACCEPT",
+                "ERR:ORDERHEAD_ACCEPT|",
+                new SqlParameter("@HeadId", ParseIntRequired(parts[1])));
+        }
+
+        private async Task<string> HandleSaleHeadsGetAllAsync()
+        {
+            return await QueryProcedureAsJsonAsync("dbo.SaleHeadsGetAll", "OK:SALEHEADS|", "ERR:SALEHEADS|");
+        }
+
+        private async Task<string> HandleSaleSpecsGetByHeadAsync(string[] parts)
+        {
+            if (parts.Length < 2)
+                return "ERR:SALESPECS_GET_BY_HEAD_FORMAT";
+
+            return await QueryProcedureAsJsonAsync(
+                "dbo.SaleSpecsGetByHead",
+                "OK:SALESPECS|",
+                "ERR:SALESPECS|",
+                new SqlParameter("@HeadId", ParseIntRequired(parts[1])));
+        }
+
+        private async Task<string> HandleSaleHeadAddAsync(string[] parts)
+        {
+            if (parts.Length < 4)
+                return "ERR:SALEHEAD_ADD_FORMAT";
+
+            return await ExecuteProcedureReturningIdAsync(
+                "dbo.SaleHeadAdd",
+                "saleheadid",
+                "OK:SALEHEAD_ADD|",
+                "ERR:SALEHEAD_ADD|",
+                new SqlParameter("@StoreId", ParseIntRequired(parts[1])),
+                new SqlParameter("@ManagerId", ParseIntRequired(parts[2])),
+                new SqlParameter("@ClientId", ParseIntRequired(parts[3])));
+        }
+
+        private async Task<string> HandleSaleSpecAddAsync(string[] parts)
+        {
+            if (parts.Length < 4)
+                return "ERR:SALESPEC_ADD_FORMAT";
+
+            return await ExecuteProcedureReturningIdAsync(
+                "dbo.SalespecAdd",
+                "salespecid",
+                "OK:SALESPEC_ADD|",
+                "ERR:SALESPEC_ADD|",
+                new SqlParameter("@HeadId", ParseIntRequired(parts[1])),
+                new SqlParameter("@NomenId", ParseIntRequired(parts[2])),
+                new SqlParameter("@Quant", ParseDecimalRequired(parts[3])),
+                new SqlParameter("@Id", SqlDbType.Int) { Direction = ParameterDirection.Output });
+        }
+
+        private async Task<string> HandleSaleSpecDeleteAsync(string[] parts)
+        {
+            if (parts.Length < 2)
+                return "ERR:SALESPEC_DELETE_FORMAT";
+
+            return await ExecuteProcedureAsync(
+                "dbo.SaleSpecDelete",
+                "OK:SALESPEC_DELETE",
+                "ERR:SALESPEC_DELETE|",
+                new SqlParameter("@SpecId", ParseIntRequired(parts[1])));
+        }
+
+        private async Task<string> HandleSaleHeadProcessAsync(string[] parts)
+        {
+            if (parts.Length < 2)
+                return "ERR:SALEHEAD_PROCESS_FORMAT";
+
+            return await ExecuteProcedureAsync(
+                "dbo.SaleHeadProcess",
+                "OK:SALEHEAD_PROCESS",
+                "ERR:SALEHEAD_PROCESS|",
+                new SqlParameter("@HeadId", ParseIntRequired(parts[1])));
+        }
+
+        private async Task<string> HandleTransferHeadsGetAllAsync()
+        {
+            return await QueryProcedureAsJsonAsync("dbo.TransferHeadsGetAll", "OK:TRANSFERHEADS|", "ERR:TRANSFERHEADS|");
+        }
+
+        private async Task<string> HandleTransferSpecsGetByHeadAsync(string[] parts)
+        {
+            if (parts.Length < 2)
+                return "ERR:TRANSFERSPECS_GET_BY_HEAD_FORMAT";
+
+            return await QueryProcedureAsJsonAsync(
+                "dbo.TransferSpecsGetByHead",
+                "OK:TRANSFERSPECS|",
+                "ERR:TRANSFERSPECS|",
+                new SqlParameter("@HeadId", ParseIntRequired(parts[1])));
+        }
+
+        private async Task<string> HandleTransferHeadAddAsync(string[] parts)
+        {
+            if (parts.Length < 3)
+                return "ERR:TRANSFERHEAD_ADD_FORMAT";
+
+            return await ExecuteProcedureReturningIdAsync(
+                "dbo.TransferHeadAdd",
+                "transferheadid",
+                "OK:TRANSFERHEAD_ADD|",
+                "ERR:TRANSFERHEAD_ADD|",
+                new SqlParameter("@StoreOutId", ParseIntRequired(parts[1])),
+                new SqlParameter("@StoreInId", ParseIntRequired(parts[2])));
+        }
+
+        private async Task<string> HandleTransferSpecAddAsync(string[] parts)
+        {
+            if (parts.Length < 4)
+                return "ERR:TRANSFERSPEC_ADD_FORMAT";
+
+            return await ExecuteProcedureReturningIdAsync(
+                "dbo.TransferSpecAdd",
+                "transferspecid",
+                "OK:TRANSFERSPEC_ADD|",
+                "ERR:TRANSFERSPEC_ADD|",
+                new SqlParameter("@HeadId", ParseIntRequired(parts[1])),
+                new SqlParameter("@NomenId", ParseIntRequired(parts[2])),
+                new SqlParameter("@Quant", ParseDecimalRequired(parts[3])));
+        }
+
+        private async Task<string> HandleTransferSpecDeleteAsync(string[] parts)
+        {
+            if (parts.Length < 2)
+                return "ERR:TRANSFERSPEC_DELETE_FORMAT";
+
+            return await ExecuteProcedureAsync(
+                "dbo.TransferSpecDelete",
+                "OK:TRANSFERSPEC_DELETE",
+                "ERR:TRANSFERSPEC_DELETE|",
+                new SqlParameter("@SpecId", ParseIntRequired(parts[1])));
+        }
+
+        private async Task<string> HandleTransferHeadSendAsync(string[] parts)
+        {
+            if (parts.Length < 2)
+                return "ERR:TRANSFERHEAD_SEND_FORMAT";
+
+            return await ExecuteProcedureAsync(
+                "dbo.TransferHeadSend",
+                "OK:TRANSFERHEAD_SEND",
+                "ERR:TRANSFERHEAD_SEND|",
+                new SqlParameter("@HeadId", ParseIntRequired(parts[1])));
+        }
+
+        private async Task<string> HandleTransferHeadAcceptAsync(string[] parts)
+        {
+            if (parts.Length < 2)
+                return "ERR:TRANSFERHEAD_ACCEPT_FORMAT";
+
+            return await ExecuteProcedureAsync(
+                "dbo.TransferHeadAccept",
+                "OK:TRANSFERHEAD_ACCEPT",
+                "ERR:TRANSFERHEAD_ACCEPT|",
+                new SqlParameter("@HeadId", ParseIntRequired(parts[1])));
+        }
+
+        private DBConnection CreateDb()
+        {
+            return new DBConnection(_connectionString);
+        }
+
+        private async Task<string> QueryProcedureAsJsonAsync(
+            string procedureName,
+            string successPrefix,
+            string errorPrefix,
+            params SqlParameter[] parameters)
+        {
             try
             {
-                DBConnection db = new DBConnection(_connectionString);
-                DataTable dt = await db.ExecuteProcedureQueryAsync(
-                    "dbo.ReportOrdersByProduct",
-                    new SqlParameter("@ProductId", int.Parse(parts[1])));
-
-                return "OK:REPORT|" + TableToJson(dt);
+                DBConnection db = CreateDb();
+                DataTable dt = await db.ExecuteProcedureQueryAsync(procedureName, parameters);
+                return successPrefix + TableToJson(dt);
             }
             catch (Exception ex)
             {
-                AddLog("Ошибка отчета по товару: " + ex.Message);
-                return "ERR:REPORT_ORDERS_BY_PRODUCT|" + NormalizeMessage(ex.Message);
+                AddLog($"Ошибка процедуры {procedureName}: {ex.Message}");
+                return errorPrefix + NormalizeMessage(ex.Message);
+            }
+        }
+
+        private async Task<string> ExecuteProcedureAsync(
+            string procedureName,
+            string successResponse,
+            string errorPrefix,
+            params SqlParameter[] parameters)
+        {
+            try
+            {
+                DBConnection db = CreateDb();
+                await db.ExecuteProcedureNonQueryAsync(procedureName, parameters);
+                return successResponse;
+            }
+            catch (Exception ex)
+            {
+                AddLog($"Ошибка процедуры {procedureName}: {ex.Message}");
+                return errorPrefix + NormalizeMessage(ex.Message);
+            }
+        }
+
+        private async Task<string> ExecuteProcedureReturningIdAsync(
+            string procedureName,
+            string idColumnName,
+            string successPrefix,
+            string errorPrefix,
+            params SqlParameter[] parameters)
+        {
+            try
+            {
+                DBConnection db = CreateDb();
+                DataTable dt = await db.ExecuteProcedureQueryAsync(procedureName, parameters);
+
+                string idValue = "";
+                if (dt.Rows.Count > 0 && dt.Columns.Contains(idColumnName))
+                    idValue = dt.Rows[0][idColumnName]?.ToString() ?? "";
+
+                return successPrefix + idValue;
+            }
+            catch (Exception ex)
+            {
+                AddLog($"Ошибка процедуры {procedureName}: {ex.Message}");
+                return errorPrefix + NormalizeMessage(ex.Message);
             }
         }
 
         private object ToDbNullableString(string? value)
         {
-            return string.IsNullOrWhiteSpace(value) ? (object)DBNull.Value : value;
+            return string.IsNullOrWhiteSpace(value) ? DBNull.Value : value;
         }
 
         private object ToDbNullableInt(string? value)
@@ -719,6 +910,30 @@ namespace Storage
             throw new Exception("Некорректная дата.");
         }
 
+        private int ParseIntRequired(string? value)
+        {
+            if (!int.TryParse(value, out int result))
+                throw new Exception("Ожидалось целое число.");
+
+            return result;
+        }
+
+        private decimal ParseDecimalRequired(string? value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new Exception("Ожидалось число.");
+
+            string normalized = value.Replace(',', '.');
+
+            if (decimal.TryParse(normalized, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal result))
+                return result;
+
+            if (decimal.TryParse(value, NumberStyles.Number, CultureInfo.CurrentCulture, out result))
+                return result;
+
+            throw new Exception("Ожидалось число.");
+        }
+
         private string TableToJson(DataTable table)
         {
             List<Dictionary<string, string>> rows = new List<Dictionary<string, string>>();
@@ -728,9 +943,7 @@ namespace Storage
                 Dictionary<string, string> item = new Dictionary<string, string>();
 
                 foreach (DataColumn col in table.Columns)
-                {
                     item[col.ColumnName] = row[col]?.ToString() ?? "";
-                }
 
                 rows.Add(item);
             }
@@ -758,7 +971,6 @@ namespace Storage
                 _listener = null;
 
                 _serverStarted = false;
-
                 buttonStart.Enabled = true;
                 buttonStop.Enabled = false;
                 textBoxPort.Enabled = true;

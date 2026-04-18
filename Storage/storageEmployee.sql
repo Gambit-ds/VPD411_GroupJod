@@ -1,0 +1,6 @@
+SELECT TOP (1000) [id]
+      ,[userid]
+      ,[roleid]
+      ,[login]
+      ,[password]
+  FROM [Storag].[dbo].[Account]

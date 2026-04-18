@@ -52,7 +52,7 @@ namespace TopClient_Storage
                     return;
                 }
 
-                if (!response.StartsWith("OK:AUTH|"))
+                if (!response.StartsWith("OK:AUTH|", StringComparison.Ordinal))
                 {
                     MessageBox.Show("Ошибка авторизации: " + response);
                     return;
@@ -77,6 +77,7 @@ namespace TopClient_Storage
                 MessageBox.Show("Ошибка связи с сервером: " + ex.Message);
             }
         }
+
         private void OpenRoleForm(string role, string longName, string userId)
         {
             if (_client == null || _reader == null || _writer == null)
@@ -98,7 +99,13 @@ namespace TopClient_Storage
                     break;
 
                 case "user":
-                    nextForm = new StorageEmployee(_client, _reader, _writer);
+                    if (!int.TryParse(userId, out int employeeId))
+                    {
+                        MessageBox.Show("Сервер вернул неверный идентификатор пользователя.");
+                        return;
+                    }
+
+                    nextForm = new StorageEmployee(_client, _reader, _writer, employeeId);
                     break;
 
                 default:
@@ -108,16 +115,16 @@ namespace TopClient_Storage
 
             nextForm.Text = $"{nextForm.Text} — {longName}";
 
-            // Передаем владение соединением рабочей форме
             _client = null;
             _reader = null;
             _writer = null;
 
-            nextForm.FormClosed += (s, e) => this.Close();
+            nextForm.FormClosed += (s, e) => Close();
 
             Hide();
             nextForm.Show();
         }
+
         private async Task EnsureConnectedAsync()
         {
             if (_client != null && _client.Connected && _reader != null && _writer != null)
@@ -128,7 +135,6 @@ namespace TopClient_Storage
 
             NetworkStream stream = _client.GetStream();
 
-            // Создаем средства чтения и записи для уже открытого соединения
             _reader = new StreamReader(stream, Encoding.UTF8, false, 4096, true);
             _writer = new StreamWriter(stream, Encoding.UTF8, 4096, true)
             {
@@ -141,6 +147,7 @@ namespace TopClient_Storage
             if (hello != "OK:CONNECTED")
                 throw new Exception("Сервер вернул неверное приветствие: " + hello);
         }
+
         private async Task<string?> SendCommandAsync(string command)
         {
             if (_client == null || !_client.Connected || _reader == null || _writer == null)
