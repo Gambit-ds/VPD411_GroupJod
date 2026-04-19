@@ -95,7 +95,13 @@ namespace TopClient_Storage
                     break;
 
                 case "manager":
-                    nextForm = new Manager(_client, _reader, _writer);
+                    if (!int.TryParse(userId, out int managerId))
+                    {
+                        MessageBox.Show("Сервер вернул неверный идентификатор пользователя.");
+                        return;
+                    }
+
+                    nextForm = new Manager(_client, _reader, _writer, managerId);
                     break;
 
                 case "user":

@@ -305,6 +305,27 @@ namespace Storage
                 case "TRANSFERHEAD_ACCEPT":
                     return await HandleTransferHeadAcceptAsync(parts);
 
+                case "MANAGER_STOCK_GET":
+                    return await HandleManagerStockGetAsync(parts);
+
+                case "MANAGER_SALEHEADS_GET":
+                    return await HandleManagerSaleHeadsGetAsync(parts);
+
+                case "MANAGER_SALESPECS_GET":
+                    return await HandleManagerSaleSpecsGetAsync(parts);
+
+                case "MANAGER_SALEHEAD_ADD":
+                    return await HandleManagerSaleHeadAddAsync(parts);
+
+                case "MANAGER_SALESPEC_ADD":
+                    return await HandleManagerSalespecAddAsync(parts);
+
+                case "MANAGER_SALESPEC_DELETE":
+                    return await HandleManagerSalespecDeleteAsync(parts);
+
+                case "MANAGER_SALEHEAD_CLOSE":
+                    return await HandleManagerSaleHeadCloseAsync(parts);
+
                 default:
                     return "ERR:UNKNOWN_COMMAND";
             }
@@ -813,6 +834,162 @@ namespace Storage
                 "OK:TRANSFERHEAD_ACCEPT",
                 "ERR:TRANSFERHEAD_ACCEPT|",
                 new SqlParameter("@HeadId", ParseIntRequired(parts[1])));
+        }
+
+        private async Task<string> HandleManagerStockGetAsync(string[] parts)
+        {
+            try
+            {
+                string? storePart = parts.Length > 1 ? parts[1] : null;
+                string? productPart = parts.Length > 2 ? parts[2] : null;
+
+                DBConnection db = CreateDb();
+                DataTable dt = await db.ExecuteProcedureQueryAsync(
+                    "dbo.ManagerStockGet",
+                    new SqlParameter("@StoreId", ToDbNullableInt(storePart)),
+                    new SqlParameter("@ProductId", ToDbNullableInt(productPart)));
+
+                return "OK:MANAGER_STOCK|" + TableToJson(dt);
+            }
+            catch (Exception ex)
+            {
+                AddLog("Ошибка чтения остатков менеджера: " + ex.Message);
+                return "ERR:MANAGER_STOCK|" + NormalizeMessage(ex.Message);
+            }
+        }
+
+        private async Task<string> HandleManagerSaleHeadsGetAsync(string[] parts)
+        {
+            if (parts.Length < 2)
+                return "ERR:MANAGER_SALEHEADS_GET_FORMAT";
+
+            try
+            {
+                DBConnection db = CreateDb();
+                DataTable dt = await db.ExecuteProcedureQueryAsync(
+                    "dbo.ManagerSaleHeadsGetByManager",
+                    new SqlParameter("@ManagerId", ParseIntRequired(parts[1])));
+
+                return "OK:MANAGER_SALEHEADS|" + TableToJson(dt);
+            }
+            catch (Exception ex)
+            {
+                AddLog("Ошибка чтения заказов менеджера: " + ex.Message);
+                return "ERR:MANAGER_SALEHEADS|" + NormalizeMessage(ex.Message);
+            }
+        }
+
+        private async Task<string> HandleManagerSaleSpecsGetAsync(string[] parts)
+        {
+            if (parts.Length < 2)
+                return "ERR:MANAGER_SALESPECS_GET_FORMAT";
+
+            try
+            {
+                DBConnection db = CreateDb();
+                DataTable dt = await db.ExecuteProcedureQueryAsync(
+                    "dbo.ManagerSaleSpecsGetByHead",
+                    new SqlParameter("@HeadId", ParseIntRequired(parts[1])));
+
+                return "OK:MANAGER_SALESPECS|" + TableToJson(dt);
+            }
+            catch (Exception ex)
+            {
+                AddLog("Ошибка чтения строк заказа менеджера: " + ex.Message);
+                return "ERR:MANAGER_SALESPECS|" + NormalizeMessage(ex.Message);
+            }
+        }
+
+        private async Task<string> HandleManagerSaleHeadAddAsync(string[] parts)
+        {
+            if (parts.Length < 4)
+                return "ERR:MANAGER_SALEHEAD_ADD_FORMAT";
+
+            try
+            {
+                DBConnection db = CreateDb();
+                DataTable dt = await db.ExecuteProcedureQueryAsync(
+                    "dbo.ManagerSaleHeadAdd",
+                    new SqlParameter("@StoreId", ParseIntRequired(parts[1])),
+                    new SqlParameter("@ManagerId", ParseIntRequired(parts[2])),
+                    new SqlParameter("@ClientId", ParseIntRequired(parts[3])));
+
+                string saleHeadId = dt.Rows.Count > 0 ? dt.Rows[0]["saleheadid"]?.ToString() ?? "" : "";
+                return "OK:MANAGER_SALEHEAD_ADD|" + saleHeadId;
+            }
+            catch (Exception ex)
+            {
+                AddLog("Ошибка создания заказа менеджера: " + ex.Message);
+                return "ERR:MANAGER_SALEHEAD_ADD|" + NormalizeMessage(ex.Message);
+            }
+        }
+
+        private async Task<string> HandleManagerSalespecAddAsync(string[] parts)
+        {
+            if (parts.Length < 4)
+                return "ERR:MANAGER_SALESPEC_ADD_FORMAT";
+
+            try
+            {
+                decimal quant = decimal.Parse(parts[3], CultureInfo.InvariantCulture);
+
+                DBConnection db = CreateDb();
+                DataTable dt = await db.ExecuteProcedureQueryAsync(
+                    "dbo.ManagerSalespecAdd",
+                    new SqlParameter("@HeadId", ParseIntRequired(parts[1])),
+                    new SqlParameter("@NomenId", ParseIntRequired(parts[2])),
+                    new SqlParameter("@Quant", quant));
+
+                string specId = dt.Rows.Count > 0 ? dt.Rows[0]["salespecid"]?.ToString() ?? "" : "";
+                return "OK:MANAGER_SALESPEC_ADD|" + specId;
+            }
+            catch (Exception ex)
+            {
+                AddLog("Ошибка добавления строки заказа менеджера: " + ex.Message);
+                return "ERR:MANAGER_SALESPEC_ADD|" + NormalizeMessage(ex.Message);
+            }
+        }
+
+        private async Task<string> HandleManagerSalespecDeleteAsync(string[] parts)
+        {
+            if (parts.Length < 2)
+                return "ERR:MANAGER_SALESPEC_DELETE_FORMAT";
+
+            try
+            {
+                DBConnection db = CreateDb();
+                await db.ExecuteProcedureNonQueryAsync(
+                    "dbo.ManagerSalespecDelete",
+                    new SqlParameter("@SpecId", ParseIntRequired(parts[1])));
+
+                return "OK:MANAGER_SALESPEC_DELETE";
+            }
+            catch (Exception ex)
+            {
+                AddLog("Ошибка удаления строки заказа менеджера: " + ex.Message);
+                return "ERR:MANAGER_SALESPEC_DELETE|" + NormalizeMessage(ex.Message);
+            }
+        }
+
+        private async Task<string> HandleManagerSaleHeadCloseAsync(string[] parts)
+        {
+            if (parts.Length < 2)
+                return "ERR:MANAGER_SALEHEAD_CLOSE_FORMAT";
+
+            try
+            {
+                DBConnection db = CreateDb();
+                await db.ExecuteProcedureNonQueryAsync(
+                    "dbo.ManagerSaleHeadClose",
+                    new SqlParameter("@HeadId", ParseIntRequired(parts[1])));
+
+                return "OK:MANAGER_SALEHEAD_CLOSE";
+            }
+            catch (Exception ex)
+            {
+                AddLog("Ошибка закрытия заказа менеджера: " + ex.Message);
+                return "ERR:MANAGER_SALEHEAD_CLOSE|" + NormalizeMessage(ex.Message);
+            }
         }
 
         private DBConnection CreateDb()

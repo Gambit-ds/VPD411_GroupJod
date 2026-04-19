@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "F:\\Project_Visual_Studio\\TopClient_Storage\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|f:\\project_visual_studio\\topclient_storage\\storageemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:storageemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|f:\\project_visual_studio\\topclient_storage\\manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|f:\\project_visual_studio\\topclient_storage\\storageemployee.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:storageemployee.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|f:\\project_visual_studio\\topclient_storage\\manager.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:manager.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|f:\\project_visual_studio\\topclient_storage\\manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|f:\\project_visual_studio\\topclient_storage\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|f:\\project_visual_studio\\topclient_storage\\storageemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -17,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|F:\\Project_Visual_Studio\\TopClient_Storage\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|f:\\project_visual_studio\\topclient_storage\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|f:\\project_visual_studio\\topclient_storage\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Bookmark",
@@ -90,45 +94,58 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "StorageEmployee.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\StorageEmployee.cs",
-              "RelativeDocumentMoniker": "StorageEmployee.cs",
-              "ToolTip": "F:\\Project_Visual_Studio\\TopClient_Storage\\StorageEmployee.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]*",
-              "RelativeToolTip": "StorageEmployee.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-18T14:33:58.292Z",
-              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "StorageEmployee.Designer.cs",
-              "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\StorageEmployee.Designer.cs",
-              "RelativeDocumentMoniker": "StorageEmployee.Designer.cs",
-              "ToolTip": "F:\\Project_Visual_Studio\\TopClient_Storage\\StorageEmployee.Designer.cs*",
-              "RelativeToolTip": "StorageEmployee.Designer.cs*",
-              "ViewState": "AgIAALUCAAAAAAAAAADwv8gCAAAAAAAAAAAAAA==",
+              "Title": "Manager.Designer.cs",
+              "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\Manager.Designer.cs",
+              "RelativeDocumentMoniker": "Manager.Designer.cs",
+              "ToolTip": "F:\\Project_Visual_Studio\\TopClient_Storage\\Manager.Designer.cs",
+              "RelativeToolTip": "Manager.Designer.cs",
+              "ViewState": "AgIAAAkBAAAAAAAAAADwvzwBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-18T14:26:41.846Z",
+              "WhenOpened": "2026-04-19T06:53:57.485Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
+              "Title": "Manager.cs",
+              "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\Manager.cs",
+              "RelativeDocumentMoniker": "Manager.cs",
+              "ToolTip": "F:\\Project_Visual_Studio\\TopClient_Storage\\Manager.cs",
+              "RelativeToolTip": "Manager.cs",
+              "ViewState": "AgIAANQAAAAAAAAAAAAAANkAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-19T06:53:40.907Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Manager.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\Manager.cs",
+              "RelativeDocumentMoniker": "Manager.cs",
+              "ToolTip": "F:\\Project_Visual_Studio\\TopClient_Storage\\Manager.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "Manager.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-19T06:53:21.503Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Auth.cs",
               "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\Auth.cs",
               "RelativeDocumentMoniker": "Auth.cs",
               "ToolTip": "F:\\Project_Visual_Studio\\TopClient_Storage\\Auth.cs",
               "RelativeToolTip": "Auth.cs",
-              "ViewState": "AgIAAG0AAAAAAAAAAADwv4EAAABDAAAAAAAAAA==",
+              "ViewState": "AgIAAHMAAAAAAAAAAADwv6YAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-18T14:07:05.328Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Auth.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\Auth.cs",
               "RelativeDocumentMoniker": "Auth.cs",
@@ -139,20 +156,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "StorageEmployee.cs",
               "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\StorageEmployee.cs",
               "RelativeDocumentMoniker": "StorageEmployee.cs",
-              "ToolTip": "F:\\Project_Visual_Studio\\TopClient_Storage\\StorageEmployee.cs*",
-              "RelativeToolTip": "StorageEmployee.cs*",
+              "ToolTip": "F:\\Project_Visual_Studio\\TopClient_Storage\\StorageEmployee.cs",
+              "RelativeToolTip": "StorageEmployee.cs",
               "ViewState": "AgIAAMMCAAAAAAAAAAAiwOYCAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-18T14:03:26.102Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-18T14:03:26.102Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -164,7 +180,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Form1.cs",
               "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
