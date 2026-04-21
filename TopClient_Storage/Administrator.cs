@@ -1152,5 +1152,10 @@ namespace TopClient_Storage
         {
 
         }
+
+        private void btnReportShow_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

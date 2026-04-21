@@ -1,38 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "F:\\Project_Visual_Studio\\TopClient_Storage\\",
+  "WorkspaceRootPath": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|f:\\project_visual_studio\\topclient_storage\\manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|f:\\project_visual_studio\\topclient_storage\\manager.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:manager.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|f:\\project_visual_studio\\topclient_storage\\manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|f:\\project_visual_studio\\topclient_storage\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|d:\\\u0434\u0438\u043C\u0430\\top\\\u043A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\project\\vpd411_groupjod\\topclient_storage\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|f:\\project_visual_studio\\topclient_storage\\storageemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:storageemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|d:\\\u0434\u0438\u043C\u0430\\top\\\u043A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\project\\vpd411_groupjod\\topclient_storage\\manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|F:\\Project_Visual_Studio\\TopClient_Storage\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|d:\\\u0434\u0438\u043C\u0430\\top\\\u043A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\project\\vpd411_groupjod\\topclient_storage\\manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|d:\\\u0434\u0438\u043C\u0430\\top\\\u043A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\project\\vpd411_groupjod\\topclient_storage\\administrator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:administrator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|d:\\\u0434\u0438\u043C\u0430\\top\\\u043A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\project\\vpd411_groupjod\\topclient_storage\\administrator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:administrator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|d:\\\u0434\u0438\u043C\u0430\\top\\\u043A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\project\\vpd411_groupjod\\topclient_storage\\administrator.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:administrator.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|f:\\project_visual_studio\\topclient_storage\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|d:\\\u0434\u0438\u043C\u0430\\top\\\u043A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\project\\vpd411_groupjod\\topclient_storage\\storageemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:storageemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|f:\\project_visual_studio\\topclient_storage\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|d:\\\u0434\u0438\u043C\u0430\\top\\\u043A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\project\\vpd411_groupjod\\topclient_storage\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55E118C3-3EB3-4530-888E-AAE3CAF9827B}|TopClient_Storage.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,24 +46,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": 17,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{73068c07-fba1-453f-99ae-6edf972119b2}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:5:0:{dcc4ea97-1c0c-482b-b205-e541c0df9728}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
@@ -93,25 +81,66 @@
               "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{73068c07-fba1-453f-99ae-6edf972119b2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:5:0:{dcc4ea97-1c0c-482b-b205-e541c0df9728}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Manager.Designer.cs",
-              "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\Manager.Designer.cs",
-              "RelativeDocumentMoniker": "Manager.Designer.cs",
-              "ToolTip": "F:\\Project_Visual_Studio\\TopClient_Storage\\Manager.Designer.cs",
-              "RelativeToolTip": "Manager.Designer.cs",
-              "ViewState": "AgIAAAkBAAAAAAAAAADwvzwBAAAAAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "Administrator.Designer.cs",
+              "DocumentMoniker": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\Administrator.Designer.cs",
+              "RelativeDocumentMoniker": "Administrator.Designer.cs",
+              "ToolTip": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\Administrator.Designer.cs",
+              "RelativeToolTip": "Administrator.Designer.cs",
+              "ViewState": "AgIAAEkCAAAAAAAAAAAQwF0CAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-19T06:53:57.485Z",
+              "WhenOpened": "2026-04-21T12:52:29.476Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "Administrator.cs",
+              "DocumentMoniker": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\Administrator.cs",
+              "RelativeDocumentMoniker": "Administrator.cs",
+              "ToolTip": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\Administrator.cs",
+              "RelativeToolTip": "Administrator.cs",
+              "ViewState": "AgIAAO8CAAAAAAAAAAAwwIUEAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T12:50:55.588Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Administrator.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
+              "DocumentMoniker": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\Administrator.cs",
+              "RelativeDocumentMoniker": "Administrator.cs",
+              "ToolTip": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\Administrator.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
+              "RelativeToolTip": "Administrator.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T12:50:22.422Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Manager.cs",
-              "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\Manager.cs",
+              "DocumentMoniker": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\Manager.cs",
               "RelativeDocumentMoniker": "Manager.cs",
-              "ToolTip": "F:\\Project_Visual_Studio\\TopClient_Storage\\Manager.cs",
+              "ToolTip": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\Manager.cs",
               "RelativeToolTip": "Manager.cs",
               "ViewState": "AgIAANQAAAAAAAAAAAAAANkAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -120,75 +149,66 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Manager.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\Manager.cs",
+              "DocumentIndex": 1,
+              "Title": "Manager.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
+              "DocumentMoniker": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\Manager.cs",
               "RelativeDocumentMoniker": "Manager.cs",
-              "ToolTip": "F:\\Project_Visual_Studio\\TopClient_Storage\\Manager.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "Manager.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "ToolTip": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\Manager.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
+              "RelativeToolTip": "Manager.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-19T06:53:21.503Z",
-              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Auth.cs",
-              "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\Auth.cs",
+              "DocumentMoniker": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\Auth.cs",
               "RelativeDocumentMoniker": "Auth.cs",
-              "ToolTip": "F:\\Project_Visual_Studio\\TopClient_Storage\\Auth.cs",
+              "ToolTip": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\Auth.cs",
               "RelativeToolTip": "Auth.cs",
-              "ViewState": "AgIAAHMAAAAAAAAAAADwv6YAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADwAAAAAAAAAAAAYwFUAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-18T14:07:05.328Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Auth.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\Auth.cs",
-              "RelativeDocumentMoniker": "Auth.cs",
-              "ToolTip": "F:\\Project_Visual_Studio\\TopClient_Storage\\Auth.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "Auth.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-18T14:07:02.543Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "StorageEmployee.cs",
-              "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\StorageEmployee.cs",
-              "RelativeDocumentMoniker": "StorageEmployee.cs",
-              "ToolTip": "F:\\Project_Visual_Studio\\TopClient_Storage\\StorageEmployee.cs",
-              "RelativeToolTip": "StorageEmployee.cs",
-              "ViewState": "AgIAAMMCAAAAAAAAAAAiwOYCAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-18T14:03:26.102Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "F:\\Project_Visual_Studio\\TopClient_Storage\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAkAAAAAAAAAA==",
+              "Title": "Auth.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
+              "DocumentMoniker": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\Auth.cs",
+              "RelativeDocumentMoniker": "Auth.cs",
+              "ToolTip": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\Auth.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
+              "RelativeToolTip": "Auth.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T13:21:41.647Z"
+              "WhenOpened": "2026-04-18T14:07:02.543Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "F:\\Project_Visual_Studio\\TopClient_Storage\\Form1.cs",
-              "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "F:\\Project_Visual_Studio\\TopClient_Storage\\Form1.cs",
-              "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "StorageEmployee.cs",
+              "DocumentMoniker": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\StorageEmployee.cs",
+              "RelativeDocumentMoniker": "StorageEmployee.cs",
+              "ToolTip": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\StorageEmployee.cs",
+              "RelativeToolTip": "StorageEmployee.cs",
+              "ViewState": "AgIAALUCAAAAAAAAAAAywOYCAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T13:21:50.949Z"
+              "WhenOpened": "2026-04-18T14:03:26.102Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\\u0414\u0438\u043C\u0430\\top\\\u041A\u043E\u043C\u0430\u043D\u0434\u043D\u0430\u044F\\Project\\VPD411_GroupJod\\TopClient_Storage\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T13:21:41.647Z",
+              "EditorCaption": ""
             }
           ]
         },

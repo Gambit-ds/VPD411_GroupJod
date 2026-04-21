@@ -97,18 +97,18 @@
             lblProductCode = new Label();
             dgvProducts = new DataGridView();
             groupBoxReports = new GroupBox();
-            lblReportType = new Label();
-            cmbReportType = new ComboBox();
-            lblDateFrom = new Label();
-            dtpDateFrom = new DateTimePicker();
-            lblDateTo = new Label();
-            dtpDateTo = new DateTimePicker();
-            lblReportClient = new Label();
-            cmbReportClient = new ComboBox();
-            lblReportProduct = new Label();
-            cmbReportProduct = new ComboBox();
-            btnReportShow = new Button();
             dgvReports = new DataGridView();
+            btnReportShow = new Button();
+            cmbReportProduct = new ComboBox();
+            lblReportProduct = new Label();
+            cmbReportClient = new ComboBox();
+            lblReportClient = new Label();
+            dtpDateTo = new DateTimePicker();
+            lblDateTo = new Label();
+            dtpDateFrom = new DateTimePicker();
+            lblDateFrom = new Label();
+            cmbReportType = new ComboBox();
+            lblReportType = new Label();
             groupBoxUsersRead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
             groupBoxUserCreate.SuspendLayout();
@@ -603,7 +603,6 @@
             btnCategoryRefresh.TabIndex = 3;
             btnCategoryRefresh.Text = "Обновить";
             btnCategoryRefresh.UseVisualStyleBackColor = true;
-            btnCategoryRefresh.Click += btnCategoryRefresh_Click_1;
             // 
             // txtCategoryCode
             // 
@@ -847,109 +846,6 @@
             groupBoxReports.TabStop = false;
             groupBoxReports.Text = "Просмотр отчетов";
             // 
-            // lblReportType
-            // 
-            lblReportType.AutoSize = true;
-            lblReportType.Location = new Point(14, 112);
-            lblReportType.Name = "lblReportType";
-            lblReportType.Size = new Size(66, 15);
-            lblReportType.TabIndex = 0;
-            lblReportType.Text = "Тип отчета";
-            // 
-            // cmbReportType
-            // 
-            cmbReportType.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbReportType.FormattingEnabled = true;
-            cmbReportType.Location = new Point(14, 130);
-            cmbReportType.Margin = new Padding(3, 2, 3, 2);
-            cmbReportType.Name = "cmbReportType";
-            cmbReportType.Size = new Size(218, 23);
-            cmbReportType.TabIndex = 1;
-            // 
-            // lblDateFrom
-            // 
-            lblDateFrom.AutoSize = true;
-            lblDateFrom.Location = new Point(14, 21);
-            lblDateFrom.Name = "lblDateFrom";
-            lblDateFrom.Size = new Size(41, 15);
-            lblDateFrom.TabIndex = 2;
-            lblDateFrom.Text = "Дата с";
-            // 
-            // dtpDateFrom
-            // 
-            dtpDateFrom.Format = DateTimePickerFormat.Short;
-            dtpDateFrom.Location = new Point(14, 38);
-            dtpDateFrom.Margin = new Padding(3, 2, 3, 2);
-            dtpDateFrom.Name = "dtpDateFrom";
-            dtpDateFrom.Size = new Size(159, 23);
-            dtpDateFrom.TabIndex = 3;
-            // 
-            // lblDateTo
-            // 
-            lblDateTo.AutoSize = true;
-            lblDateTo.Location = new Point(186, 21);
-            lblDateTo.Name = "lblDateTo";
-            lblDateTo.Size = new Size(49, 15);
-            lblDateTo.TabIndex = 4;
-            lblDateTo.Text = "Дата по";
-            // 
-            // dtpDateTo
-            // 
-            dtpDateTo.Format = DateTimePickerFormat.Short;
-            dtpDateTo.Location = new Point(186, 38);
-            dtpDateTo.Margin = new Padding(3, 2, 3, 2);
-            dtpDateTo.Name = "dtpDateTo";
-            dtpDateTo.Size = new Size(170, 23);
-            dtpDateTo.TabIndex = 5;
-            // 
-            // lblReportClient
-            // 
-            lblReportClient.AutoSize = true;
-            lblReportClient.Location = new Point(14, 66);
-            lblReportClient.Name = "lblReportClient";
-            lblReportClient.Size = new Size(46, 15);
-            lblReportClient.TabIndex = 6;
-            lblReportClient.Text = "Клиент";
-            // 
-            // cmbReportClient
-            // 
-            cmbReportClient.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbReportClient.FormattingEnabled = true;
-            cmbReportClient.Location = new Point(14, 83);
-            cmbReportClient.Margin = new Padding(3, 2, 3, 2);
-            cmbReportClient.Name = "cmbReportClient";
-            cmbReportClient.Size = new Size(159, 23);
-            cmbReportClient.TabIndex = 7;
-            // 
-            // lblReportProduct
-            // 
-            lblReportProduct.AutoSize = true;
-            lblReportProduct.Location = new Point(186, 66);
-            lblReportProduct.Name = "lblReportProduct";
-            lblReportProduct.Size = new Size(39, 15);
-            lblReportProduct.TabIndex = 8;
-            lblReportProduct.Text = "Товар";
-            // 
-            // cmbReportProduct
-            // 
-            cmbReportProduct.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbReportProduct.FormattingEnabled = true;
-            cmbReportProduct.Location = new Point(186, 83);
-            cmbReportProduct.Margin = new Padding(3, 2, 3, 2);
-            cmbReportProduct.Name = "cmbReportProduct";
-            cmbReportProduct.Size = new Size(170, 23);
-            cmbReportProduct.TabIndex = 9;
-            // 
-            // btnReportShow
-            // 
-            btnReportShow.Location = new Point(246, 131);
-            btnReportShow.Margin = new Padding(3, 2, 3, 2);
-            btnReportShow.Name = "btnReportShow";
-            btnReportShow.Size = new Size(108, 22);
-            btnReportShow.TabIndex = 10;
-            btnReportShow.Text = "Показать";
-            btnReportShow.UseVisualStyleBackColor = true;
-            // 
             // dgvReports
             // 
             dgvReports.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
@@ -961,6 +857,110 @@
             dgvReports.RowTemplate.Height = 29;
             dgvReports.Size = new Size(619, 330);
             dgvReports.TabIndex = 11;
+            // 
+            // btnReportShow
+            // 
+            btnReportShow.Location = new Point(246, 131);
+            btnReportShow.Margin = new Padding(3, 2, 3, 2);
+            btnReportShow.Name = "btnReportShow";
+            btnReportShow.Size = new Size(108, 22);
+            btnReportShow.TabIndex = 10;
+            btnReportShow.Text = "Показать";
+            btnReportShow.UseVisualStyleBackColor = true;
+            btnReportShow.Click += btnReportShow_Click_1;
+            // 
+            // cmbReportProduct
+            // 
+            cmbReportProduct.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbReportProduct.FormattingEnabled = true;
+            cmbReportProduct.Location = new Point(186, 83);
+            cmbReportProduct.Margin = new Padding(3, 2, 3, 2);
+            cmbReportProduct.Name = "cmbReportProduct";
+            cmbReportProduct.Size = new Size(170, 23);
+            cmbReportProduct.TabIndex = 9;
+            // 
+            // lblReportProduct
+            // 
+            lblReportProduct.AutoSize = true;
+            lblReportProduct.Location = new Point(186, 66);
+            lblReportProduct.Name = "lblReportProduct";
+            lblReportProduct.Size = new Size(39, 15);
+            lblReportProduct.TabIndex = 8;
+            lblReportProduct.Text = "Товар";
+            // 
+            // cmbReportClient
+            // 
+            cmbReportClient.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbReportClient.FormattingEnabled = true;
+            cmbReportClient.Location = new Point(14, 83);
+            cmbReportClient.Margin = new Padding(3, 2, 3, 2);
+            cmbReportClient.Name = "cmbReportClient";
+            cmbReportClient.Size = new Size(159, 23);
+            cmbReportClient.TabIndex = 7;
+            // 
+            // lblReportClient
+            // 
+            lblReportClient.AutoSize = true;
+            lblReportClient.Location = new Point(14, 66);
+            lblReportClient.Name = "lblReportClient";
+            lblReportClient.Size = new Size(46, 15);
+            lblReportClient.TabIndex = 6;
+            lblReportClient.Text = "Клиент";
+            // 
+            // dtpDateTo
+            // 
+            dtpDateTo.Format = DateTimePickerFormat.Short;
+            dtpDateTo.Location = new Point(186, 38);
+            dtpDateTo.Margin = new Padding(3, 2, 3, 2);
+            dtpDateTo.Name = "dtpDateTo";
+            dtpDateTo.Size = new Size(170, 23);
+            dtpDateTo.TabIndex = 5;
+            // 
+            // lblDateTo
+            // 
+            lblDateTo.AutoSize = true;
+            lblDateTo.Location = new Point(186, 21);
+            lblDateTo.Name = "lblDateTo";
+            lblDateTo.Size = new Size(49, 15);
+            lblDateTo.TabIndex = 4;
+            lblDateTo.Text = "Дата по";
+            // 
+            // dtpDateFrom
+            // 
+            dtpDateFrom.Format = DateTimePickerFormat.Short;
+            dtpDateFrom.Location = new Point(14, 38);
+            dtpDateFrom.Margin = new Padding(3, 2, 3, 2);
+            dtpDateFrom.Name = "dtpDateFrom";
+            dtpDateFrom.Size = new Size(159, 23);
+            dtpDateFrom.TabIndex = 3;
+            // 
+            // lblDateFrom
+            // 
+            lblDateFrom.AutoSize = true;
+            lblDateFrom.Location = new Point(14, 21);
+            lblDateFrom.Name = "lblDateFrom";
+            lblDateFrom.Size = new Size(41, 15);
+            lblDateFrom.TabIndex = 2;
+            lblDateFrom.Text = "Дата с";
+            // 
+            // cmbReportType
+            // 
+            cmbReportType.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbReportType.FormattingEnabled = true;
+            cmbReportType.Location = new Point(14, 130);
+            cmbReportType.Margin = new Padding(3, 2, 3, 2);
+            cmbReportType.Name = "cmbReportType";
+            cmbReportType.Size = new Size(218, 23);
+            cmbReportType.TabIndex = 1;
+            // 
+            // lblReportType
+            // 
+            lblReportType.AutoSize = true;
+            lblReportType.Location = new Point(14, 112);
+            lblReportType.Name = "lblReportType";
+            lblReportType.Size = new Size(66, 15);
+            lblReportType.TabIndex = 0;
+            lblReportType.Text = "Тип отчета";
             // 
             // Administrator
             // 
